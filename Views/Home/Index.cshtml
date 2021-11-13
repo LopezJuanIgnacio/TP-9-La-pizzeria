@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4 text-white tocable">Lista de Pizzas</h1>
+</div>
+
+<div class="container-fluid mb-5">
+     <div class="row d-flex justify-content-center">
+         <div class="col-2"></div>
+         <div class="col-8">
+            <div class="d-flex justify-content-around flex-wrap">
+                @foreach(Pizza Pizzi in ViewBag.Pizzas){
+                   <div class="card carta tocable mb-5 ml-2 mr-2" style="width: 18rem;">
+                        <img src="@Pizzi.UrlFoto" class="card-img-top" alt="@Pizzi.Nombre">
+                       <div class="card-body">
+                             <h5 class="card-title">Nombre: @Pizzi.Nombre</h5>
+                            <p class="card-text">Precio: $@Pizzi.Precio</p>
+                            <p class="card-text">Tamaño: @Pizzi.Tamaño</p>
+                            <a href='@Url.Action("VerPizza","Home", new {id=@Pizzi.IdPizza})' class="btn btn-primary tocable w-100">Ver Pizza</a>
+                            <a href='@Url.Action("AgregarPizza","Home", new {id=@Pizzi.IdPizza})' class="btn btn-warning tocable w-100">Editar Pizza</a>
+                            <a href='@Url.Action("EliminarPizza","Home", new {id=@Pizzi.IdPizza})' class="btn btn-danger tocable w-100">Eliminar Pizza</a>
+                       </div>
+                   </div>
+                }    
+            </div>
+         </div>
+         <div class="col-2"></div>
+     </div>
+</div>

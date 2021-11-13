@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TP9</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+</head>
+<body>
+    <section class="d-flex flex-column">
+        
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="width: 20%;"><img src="~/img/donlopezlogo.png" style="width: 60%;"/></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href='@Url.Action("AgregarPizza","Home", new {Id=-1})'>Agregar pizza</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href='@Url.Action("AgregarPizza","Home", new {Id=-2})'>Agregar ingrediente</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="agrandador">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+        <!-- hay un pequeño detalle, la cantidad de iconos de fondo NO cambia, solo es una cantidad grande para que la unica forma que se acaben los iconos
+        es haciendo que la pagina SEA MUUUUUY GRANDE cosa q podria pasar creando muchas pizzas, esto lo podria arreglar haciendo que la cantidad de repeticiones
+        del ciclo for sea dependiente del heigth del documento pero ni idea como poner el height ahi-->
+        <div class="iconosContainer">
+            @for (int i = 1; i <= 20; i++)
+            {
+                <div class="iconos">
+                    @for (int j = 1; j <= 2; j++)
+                    {
+                        <div>
+                            @for (int h = 1; h <= 20; h++)
+                            {
+                                <i class="fas fa-pizza-slice"></i>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        </div>    
+        <footer class="border-top footer text-muted justify-content-end">
+            <div class="container">
+                <h3 class="mt-3">&copy; 2021 - TP9 </h3>
+                <h5 class="mt-3">Lopez y Radrizzani</h5>
+            </div>
+        </footer>
+           
+    </section>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

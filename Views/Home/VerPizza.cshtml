@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Mirame la Pizzi";
+}
+<div class="paAbajo">
+    <div class="media pt-5 row d-flex tocable mb-5" >
+        <img class="align-self-start mr-3 col-md-2 col-11 ml-3" src="@ViewBag.Pizza.UrlFoto">
+        <div class="media-body col-md-10 col-11 ml-3 fondo">
+          <h1 class="text-white text-center" style="margin-right:200">Nombre: @ViewBag.Pizza.Nombre</h1>
+          <h3 class="text-white text-center">Tamaño: @ViewBag.Pizza.Tamaño</h3>
+          <h3 class="text-white text-center">Precio: $@ViewBag.Pizza.Precio</h3>
+          <div class="d-flex justify-content-center">
+              <a href='@Url.Action("AgregarPizza","Home", new {id=@ViewBag.Pizza.IdPizza})' class="btn btn-warning mr-1">Editar Pizza</a>
+              <a href='@Url.Action("EliminarPizza","Home", new {id=@ViewBag.Pizza.IdPizza})' class="btn btn-danger ml-1">Eliminar Pizza</a>
+          </div>
+        </div>
+    </div>
+    <h1 class="text-white text-center">Ingredientes:</h1>
+    <div class="d-flex justify-content-around flex-wrap">
+        @foreach (var ingrediente in ViewBag.Pizza.ListarIngredientes())
+          {
+            <div class="card carta tocable mb-5 ml-2 mr-2" style="width: 18rem;">
+                 <img src="@ingrediente.UrlFoto" class="card-img-top" alt="@ingrediente.Nombre">
+                <div class="card-body">
+                    <h3 class="card-title">@ingrediente.Nombre</h3>
+                </div>
+            </div>
+          } 
+    </div>
+</div>

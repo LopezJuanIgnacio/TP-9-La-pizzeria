@@ -1,0 +1,86 @@
+
+<div class="d-flex justify-content-center agrandador paAbajo">
+    <div class="form_wrapper">
+        @if (ViewBag.isPizza)
+        {
+            ViewData["Title"] = "Agrega tu Pizza!";
+            @if(ViewBag.Pizza != null){
+                <form method="post" action='@Url.Action("EditarPizza","Home")' class="tocable">
+                    <h2 class="titulo">Cree su Propia Pizza</h2>
+                    <input required type="hidden" name="Id" value="@ViewBag.Pizza.IdPizza">
+                    <input required minlength="2" maxlength="16" type="text" name="Nombre" placeholder="Nombre" value="@ViewBag.Pizza.Nombre"/>
+                    <input required minlength="2" maxlength="10" type="number" name="Precio" placeholder="Precio"value="@ViewBag.Pizza.Precio"/>
+                    <input required minlength="2" type="text" name="Url" placeholder="Url" value="@ViewBag.Pizza.UrlFoto"/>
+                    <select name="Tamaño">
+                        <option value="Chica">Chica</option>
+                        <option value="Mediana">Mediana</option>
+                        <option value="Grande">Grande</option>
+                    </select>
+                  <div class="wrapper">
+                        <div class="title">
+                            Elegi tus ingredientes!
+                        </div>
+                        <div class="contenedor row">
+                            @foreach (var Ingrediente in ViewBag.Ingredientes)
+                            {
+                                <label class="option_item col-md-3">
+                                    @if (ViewBag.Pizza.ListarIngredientes().Contains(Ingrediente))
+                                    {
+                                        <input type="checkbox" class="checkbox" name="Ingredientes[]" value="@Ingrediente.IdIngrediente" checked>
+                                    }else{
+                                        <input type="checkbox" class="checkbox" name="Ingredientes[]" value="@Ingrediente.IdIngrediente">
+                                    }
+                                    <div class="option_inner">
+                                        <div class="tickmark"></div>
+                                        <div class="imagen"><img src="@Ingrediente.UrlFoto" alt="@Ingrediente.Nombre"></div>
+                                        <div class="name">@Ingrediente.Nombre</div>
+                                    </div>
+                                </label> 
+                            }
+                        </div>
+                    </div>
+                    <input type="submit"/>
+                </form>
+            }else{
+                <form method="post" action='@Url.Action("GuardarPizza","Home")' class="tocable">
+                    <h2 class="titulo">Cree su Propia Pizza</h2>
+                    <input required minlength="2" maxlength="16" type="text" name="Nombre" placeholder="Nombre"/>
+                    <input required minlength="2" maxlength="10" type="number" name="Precio" placeholder="Precio"/>
+                    <input required type="text" name="Url" placeholder="Url"/>
+                    <select required name="Tamaño">
+                        <option value="Chica">Chica</option>
+                        <option value="Mediana">Mediana</option>
+                        <option value="Grande">Grande</option>
+                    </select>
+                    <div class="wrapper">
+                        <div class="title">
+                            Elegi tus ingredientes!
+                        </div>
+                        <div class="contenedor row">
+                            @foreach (var Ingrediente in ViewBag.Ingredientes)
+                            {
+                                <label class="option_item col-md-3">
+                                    <input type="checkbox" class="checkbox" name="Ingredientes[]" value="@Ingrediente.IdIngrediente">
+                                    <div class="option_inner">
+                                        <div class="tickmark"></div>
+                                        <div class="imagen"><img src="@Ingrediente.UrlFoto" alt="@Ingrediente.Nombre"></div>
+                                        <div class="name">@Ingrediente.Nombre</div>
+                                    </div>
+                                </label>
+                            }
+                        </div>
+                    </div>
+                    <input type="submit"/>
+                </form>
+            }
+        }else{
+            ViewData["Title"] = "Agrega tu Ingrediente!";
+            <form method="post" action='@Url.Action("GuardarIngrediente","Home")' class="tocable"> 
+                <h2 class="titulo">Cree su Propio Ingrediente</h2>
+                <input required minlength="2" maxlength="16" type="text" name="Nombre" placeholder="Nombre"/>
+                <input required minlength="2" type="text" name="Url" placeholder="Url"/>
+                <input type="submit"/>
+            </form>
+        }    
+    </div> 
+</div>
